@@ -7,19 +7,19 @@ def draw_network_graph(conexoes, router_image):
     # Criar um grafo direcionado
     G = nx.DiGraph()
 
-    # Adicionar roteador R1
-    G.add_node('R1')
+    # Adicionar roteador
+    G.add_node('hl4')
 
-    # Adicionar os outros roteadores e as conexões com R1
+    # Adicionar os outros roteadores e as conexões com hl4
     for conexao in conexoes:
-        hl4_hostname = conexao[0]
-        hl3_hostname = conexao[2]  # Nome do roteador conectado a R1
-        porta_hl4 = conexao[1]  # Porta do roteador R1
-        porta_hl3 = conexao[3]  # Porta do roteador conectado a R1
+        hl4_hostname = conexao[0]  # Nome do roteador hl4
+        hl3_hostname = conexao[2]  # Nome do roteador conectado a hl4
+        porta_hl4 = conexao[1]  # Porta do roteador hl4
+        porta_hl3 = conexao[3]  # Porta do roteador conectado a hl4
         G.add_node(hl3_hostname)
         G.add_edge(hl4_hostname, hl3_hostname, porta_hl3=porta_hl3, porta_hl4=porta_hl4)
 
-    # Definir posições dos nós (para melhor visualização)
+    # Definir posições dos nós
     pos = nx.spring_layout(G)
 
     # Carregar a imagem do roteador
@@ -54,14 +54,14 @@ def draw_network_graph(conexoes, router_image):
         plt.text(text_x + delta_x, text_y + delta_y, f"{porta_hl3}", ha='center', va='center', fontsize=8)
         plt.text(text_x - delta_x, text_y - delta_y, f"{porta_hl4}", ha='center', va='center', fontsize=8)
 
-    plt.title("Topologia")
+    plt.title("Topologia") # Titulo do grafico
     plt.axis('off')  # Desativar os eixos
     plt.show() #Abre a figura.
 
-# Lista de conexões (substitua isso com seus dados reais)
+# Lista de conexões
 conexoes = [
-    ['i-br-pr-cta-vm-hl4-01', 'GigabitEthernet0/0/0', 'i-br-pr-cta-vm-hl3-01', 'GigabitEthernet0/1/0'],
-    ['i-br-pr-cta-vm-hl4-01', 'GigabitEthernet0/1/0', 'i-br-pr-cta-vm-hl4-02', 'GigabitEthernet0/0/0']
+    ['i-br-pr-cta-cta-hl4-01', 'GigabitEthernet0/0/0', 'i-br-pr-cta-cta-hlx-01', 'GigabitEthernet0/1/0'],
+    ['i-br-pr-cta-cta-hl4-01', 'GigabitEthernet0/1/0', 'i-br-pr-cta-cta-hlx-02', 'GigabitEthernet0/0/0']
 ]
 
 # Caminho para a imagem do roteador
