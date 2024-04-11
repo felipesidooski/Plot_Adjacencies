@@ -11,7 +11,7 @@ def draw_network_graph(conexoes, router_image):
     # Adicionar roteador R1
     G.add_node('R1')
 
-    # Adicionar os outros roteadores e as conexões com R1
+    # Adicionar os outros roteadores e as conexões
     for conexao in conexoes:
         hl4_hostname = conexao[0]
         hl3_hostname = conexao[2]  # Nome do roteador conectado a R1
@@ -20,7 +20,7 @@ def draw_network_graph(conexoes, router_image):
         G.add_node(hl3_hostname)
         G.add_edge(hl4_hostname, hl3_hostname, porta_hl3=porta_hl3, porta_hl4=porta_hl4)
 
-    # Definir posições dos nós (para melhor visualização)
+    # Definir posições dos nós
     pos = nx.spring_layout(G)
 
     # Carregar a imagem do roteador
@@ -35,7 +35,7 @@ def draw_network_graph(conexoes, router_image):
         # Adicionar hostname abaixo da figura
         plt.text(x, y - 0.1, node, va='center', ha='center', fontsize=10, fontweight='bold')
 
-    # Desenhar as arestas (conexões entre roteadores) e adicionar portas
+    # Desenhar as arestas (conexões entre roteadores) + adicionar portas
     for u, v, d in G.edges(data=True):
         porta_hl3 = d['porta_hl3']
         porta_hl4 = d['porta_hl4']
@@ -65,7 +65,7 @@ def draw_network_graph(conexoes, router_image):
     with open('topologia.html', 'w') as f:
         f.write(html)
 
-# Lista de conexões (substitua isso com seus dados reais)
+# Lista de conexões - lista
 conexoes = [
     ['i-br-pr-cta-vm-hl4-01', 'GigabitEthernet0/0/0', 'i-br-pr-cta-vm-hl3-01', 'GigabitEthernet0/1/0'],
     ['i-br-pr-cta-vm-hl4-01', 'GigabitEthernet0/1/0', 'i-br-pr-cta-vm-hl4-02', 'GigabitEthernet0/0/0']
